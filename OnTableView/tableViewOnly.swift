@@ -9,7 +9,20 @@
 import UIKit
 import Contacts
 import EventKit
-class oneTableViewController : UITableViewController {
+import CoreData
+protocol soso: class{
+    func alarmWasToggled(sender: AlarmTableViewCell, ison : Bool)
+}
+
+class oneTableViewController : UITableViewController ,soso{
+    var del = ViewController()
+    func alarmWasToggled(sender: AlarmTableViewCell, ison: Bool) {
+        let indexPath = self.tableView.indexPath(for: sender)
+        del.toggleEnabled(index: indexPath!.row)
+    }
+    let context = (UIApplication.shared.delegate as! AppDelegate ).persistentContainer.viewContext
+    var alarmo = [Alarm]()
+    
     var contArray = [CONTACTS]()
     var reminderstoto : [EKReminder]?
     var Seguesty : String = ""
@@ -21,6 +34,7 @@ class oneTableViewController : UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        LoadAlarm()
         prepareToLoadReminders()
         prepareToLoadCalendar()
     }
@@ -48,19 +62,33 @@ class oneTableViewController : UITableViewController {
             return (reminderstoto?.count ?? 0)
         }else if Seguesty == "eventSegue"{
             return (events?.count)!
+        }else if Seguesty == "alarmSegue"{
+            return alarmo.count
         }
         return 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "oneCell", for: indexPath)
+        var cell = tableView.dequeueReusableCell(withIdentifier: "oneCell", for: indexPath) as! AlarmTableViewCell
         if Seguesty == "callSegue" || Seguesty == "smsSegue"{
 
-        cell.textLabel?.text = contArray[indexPath.row].fullname
+        cell.nameLabel!.text = contArray[indexPath.row].fullname
+        cell.timeLabel!.text = contArray[indexPath.row].number
+        cell.alarmSwitch.isHidden = true
         }else if Seguesty == "reminderSegue"{
-            cell.textLabel?.text = reminderstoto?[indexPath.row].title
+            var datecomp = reminderstoto?[indexPath.row].dueDateComponents
+            cell.nameLabel!.text = reminderstoto?[indexPath.row].title
+            cell.timeLabel!.text = "\(datecomp!.year ?? 0)/\(datecomp?.month ?? 0)/\( datecomp?.day ?? 0)     \(datecomp?.hour ?? 0):\(datecomp?.minute ?? 0)"
+            cell.alarmSwitch.isHidden = true
         }else if Seguesty == "eventSegue"{
-            cell.textLabel?.text = events?[indexPath.row].title
+            cell.nameLabel!.text = events?[indexPath.row].title
+            cell.timeLabel!.text = "\(events?[indexPath.row].endDate ?? Date())"
+        }else if Seguesty == "alarmSegue"{
+            
+            cell.nameLabel!.text = alarmo[indexPath.row].name
+            cell.timeLabel!.text = alarmo[indexPath.row].stringofDate
+            cell.alarmSwitch.isOn = alarmo[indexPath.row].enabled
+            cell.delegatess = self
         }
         
         return cell
@@ -70,11 +98,19 @@ class oneTableViewController : UITableViewController {
         if Seguesty == "eventSegue"{
              gotoAppleCalendar(date: events?[indexPath.row].startDate as! NSDate)
         }else{
-            UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)}
+             UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)}
     }
     func gotoAppleCalendar(date: NSDate) {
         let interval = date.timeIntervalSinceReferenceDate
         let url = NSURL(string: "calshow:\(interval)")!
         UIApplication.shared.openURL(url as URL)
+    }
+    func LoadAlarm(){
+        let request : NSFetchRequest<Alarm>=Alarm.fetchRequest()
+        do{
+            alarmo = try context.fetch(request)
+        }catch {
+            print("Error fetching")
+        }
     }
 }

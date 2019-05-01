@@ -60,7 +60,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <state key="normal" title="load  reminders"/>
                                 <connections>
-                                    <segue destination="sUw-4l-Q6u" kind="show" identifier="reminderSegue" id="r4j-G2-Rj7"/>
+                                    <segue destination="Vcf-J2-b04" kind="show" identifier="reminderSegue" id="esx-g1-Hes"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oLH-Rz-p7l">
@@ -78,7 +78,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                 <state key="normal" title="load event"/>
                                 <connections>
-                                    <segue destination="sUw-4l-Q6u" kind="show" identifier="eventSegue" id="9Zj-ib-C2h"/>
+                                    <segue destination="Vcf-J2-b04" kind="show" identifier="eventSegue" id="hqh-Xh-U6g"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3I-iE-4xu">
@@ -90,13 +90,58 @@
                                     <action selector="Remove_event:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w90-ql-Nf2"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCa-Aj-KDk">
+                                <rect key="frame" x="307" y="354" width="93" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="add Alarm"/>
+                                <connections>
+                                    <action selector="addAlarm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fug-Vv-bEb"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1ao-tN-P3v">
+                                <rect key="frame" x="277" y="503" width="123" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="remove alarm"/>
+                                <connections>
+                                    <action selector="removeAlarm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="JyQ-dg-r6k"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fm4-9R-fXh">
+                                <rect key="frame" x="240" y="654" width="160" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="updateDateAlarm"/>
+                                <connections>
+                                    <action selector="updateAlarm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HhH-cx-8WC"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EE5-Gn-5Is">
+                                <rect key="frame" x="215" y="721" width="179" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="updateEnableAlarm"/>
+                                <connections>
+                                    <action selector="updateEnableAlarm:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ol6-w2-b0T"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXq-3n-Xhl">
+                                <rect key="frame" x="91" y="762" width="103" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="loadAlarms"/>
+                                <connections>
+                                    <segue destination="Vcf-J2-b04" kind="show" identifier="alarmSegue" id="su9-Z5-1Nt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <segue destination="sUw-4l-Q6u" kind="show" identifier="callSegue" id="kW1-Tw-eQp"/>
-                        <segue destination="sUw-4l-Q6u" kind="show" identifier="smsSegue" id="8zw-O3-v4t"/>
+                        <segue destination="Vcf-J2-b04" kind="show" identifier="callSegue" id="UXK-yq-YQe"/>
+                        <segue destination="Vcf-J2-b04" kind="show" identifier="smsSegue" id="uFm-mI-ESQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -104,35 +149,63 @@
             <point key="canvasLocation" x="317" y="-4"/>
         </scene>
         <!--One Table View Controller-->
-        <scene sceneID="rwE-5a-QsR">
+        <scene sceneID="AX1-ij-pWG">
             <objects>
-                <tableViewController id="sUw-4l-Q6u" customClass="oneTableViewController" customModule="OnTableView" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ckV-ea-8rA">
+                <tableViewController id="Vcf-J2-b04" customClass="oneTableViewController" customModule="OnTableView" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="lxp-5z-6lX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="oneCell" id="9WC-Nc-EBh">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="oneCell" id="fq1-F5-ZwP" customClass="AlarmTableViewCell" customModule="OnTableView" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9WC-Nc-EBh" id="KYz-w1-X5i">
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fq1-F5-ZwP" id="1f1-iG-cZE">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ah3-Kn-sRY">
+                                            <rect key="frame" x="16" y="-2" width="275" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="timeLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvN-8P-juk">
+                                            <rect key="frame" x="16" y="22" width="275" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eMR-hd-Zy9">
+                                            <rect key="frame" x="299" y="6" width="49" height="31"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <connections>
+                                                <action selector="alarmSwitched:" destination="fq1-F5-ZwP" eventType="valueChanged" id="oIc-YZ-GYW"/>
+                                            </connections>
+                                        </switch>
+                                    </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="alarmSwitch" destination="eMR-hd-Zy9" id="kWD-E4-hwt"/>
+                                    <outlet property="nameLabel" destination="ah3-Kn-sRY" id="rwF-2C-GM6"/>
+                                    <outlet property="timeLabel" destination="xvN-8P-juk" id="YYN-SF-Ggh"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="sUw-4l-Q6u" id="TU5-Eo-RrI"/>
-                            <outlet property="delegate" destination="sUw-4l-Q6u" id="s8s-7b-WzH"/>
+                            <outlet property="dataSource" destination="Vcf-J2-b04" id="pdY-ay-3eI"/>
+                            <outlet property="delegate" destination="Vcf-J2-b04" id="xus-fX-oqx"/>
                         </connections>
                     </tableView>
                 </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sEe-PP-HPE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YTG-oO-9fW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1155" y="98"/>
+            <point key="canvasLocation" x="1173.913043478261" y="-4.0178571428571423"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="9Zj-ib-C2h"/>
+        <segue reference="su9-Z5-1Nt"/>
     </inferredMetricsTieBreakers>
 </document>

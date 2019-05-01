@@ -14,6 +14,8 @@
 		B3028E3F22759B7D00288D51 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3028E3D22759B7D00288D51 /* LaunchScreen.storyboard */; };
 		B3028E482275B51900288D51 /* contacts.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3028E462275B51800288D51 /* contacts.swift */; };
 		B3028E4D2275BCDD00288D51 /* tableViewOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3028E4C2275BCDD00288D51 /* tableViewOnly.swift */; };
+		B3AAB6ED2279062100CD7A7A /* CoreDataAlarm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B3AAB6EB2279062100CD7A7A /* CoreDataAlarm.xcdatamodeld */; };
+		B3AAB6F1227A23F500CD7A7A /* AlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AAB6F0227A23F400CD7A7A /* AlarmTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,8 @@
 		B3028E4022759B7D00288D51 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B3028E462275B51800288D51 /* contacts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = contacts.swift; sourceTree = "<group>"; };
 		B3028E4C2275BCDD00288D51 /* tableViewOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tableViewOnly.swift; sourceTree = "<group>"; };
+		B3AAB6EC2279062100CD7A7A /* CoreDataAlarm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataAlarm.xcdatamodel; sourceTree = "<group>"; };
+		B3AAB6F0227A23F400CD7A7A /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,11 +65,13 @@
 				B3028E3422759B6D00288D51 /* AppDelegate.swift */,
 				B3028E3622759B6D00288D51 /* ViewController.swift */,
 				B3028E4C2275BCDD00288D51 /* tableViewOnly.swift */,
+				B3AAB6F0227A23F400CD7A7A /* AlarmTableViewCell.swift */,
 				B3028E3822759B6D00288D51 /* Main.storyboard */,
 				B3028E462275B51800288D51 /* contacts.swift */,
 				B3028E3B22759B7D00288D51 /* Assets.xcassets */,
 				B3028E3D22759B7D00288D51 /* LaunchScreen.storyboard */,
 				B3028E4022759B7D00288D51 /* Info.plist */,
+				B3AAB6EB2279062100CD7A7A /* CoreDataAlarm.xcdatamodeld */,
 			);
 			path = OnTableView;
 			sourceTree = "<group>";
@@ -143,7 +149,9 @@
 			files = (
 				B3028E3722759B6D00288D51 /* ViewController.swift in Sources */,
 				B3028E482275B51900288D51 /* contacts.swift in Sources */,
+				B3AAB6ED2279062100CD7A7A /* CoreDataAlarm.xcdatamodeld in Sources */,
 				B3028E3522759B6D00288D51 /* AppDelegate.swift in Sources */,
+				B3AAB6F1227A23F500CD7A7A /* AlarmTableViewCell.swift in Sources */,
 				B3028E4D2275BCDD00288D51 /* tableViewOnly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +352,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B3AAB6EB2279062100CD7A7A /* CoreDataAlarm.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B3AAB6EC2279062100CD7A7A /* CoreDataAlarm.xcdatamodel */,
+			);
+			currentVersion = B3AAB6EC2279062100CD7A7A /* CoreDataAlarm.xcdatamodel */;
+			path = CoreDataAlarm.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = B3028E2922759B6D00288D51 /* Project object */;
 }
