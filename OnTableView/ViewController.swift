@@ -25,10 +25,11 @@ class ViewController: UIViewController ,AlarmScheduler{
     let fileURL = "/Users/phoebeezzat/Desktop/test.txt"
     var arrayOfStrings : [String] = []
     var urls : NSURL!
-    var smstext : String = ""
+    var smstext : String = "hello dora hhhjg  fghdrj"
+    var searchGoogle : String = ""
     let eventStore : EKEventStore = EKEventStore()
     lazy var reminder : EKReminder = EKReminder(eventStore: eventStore)
-    var remindersto : [EKReminder]?
+    var remindersto = [EKReminder]()
     var calendars: [EKCalendar]?
     let context = (UIApplication.shared.delegate as! AppDelegate ).persistentContainer.viewContext
     var alarmo = [Alarm]()
@@ -46,7 +47,7 @@ class ViewController: UIViewController ,AlarmScheduler{
     }
     @IBAction func removeAlarm(_ sender:UIButton) {
         formatter.dateFormat = "HH:mm"
-        let DateTime = formatter.date(from: "09:30");
+        let DateTime = formatter.date(from: "11:11");
         
         delete(date: DateTime!)
         
@@ -60,7 +61,7 @@ class ViewController: UIViewController ,AlarmScheduler{
     }
     @IBAction func updateEnableAlarm(_ sender: UIButton) {
         formatter.dateFormat = "HH:mm"
-        let DateTime = formatter.date(from: "09:30");
+        let DateTime = formatter.date(from: "06:30");
         changeenabled(enabled: false, fireDate: DateTime!)
     }
     func create(name: String, fireDate: Date, enabled: Bool){
@@ -198,7 +199,7 @@ class ViewController: UIViewController ,AlarmScheduler{
         let fetchreq = CNContactFetchRequest.init(keysToFetch: keys as [CNKeyDescriptor] )
         do{
             try ContactStore.enumerateContacts(with: fetchreq) { (contact, end) in
-                let datacontant = CONTACTS(NAME: "\(contact.givenName) \(contact.familyName)", phoneNumber: contact.phoneNumbers.first?.value.stringValue ?? "")
+                let datacontant = CONTACTS(NAME: "\(contact.givenName) \(contact.familyName)", phoneNumber: contact.phoneNumbers.first?.value.stringValue ?? "400")
                 self.fetcontacts.append(datacontant)
                 //    let dict = [ datacontant.fullname: datacontant.number]
                 //    self.contactdic.append(dict)
@@ -223,7 +224,7 @@ class ViewController: UIViewController ,AlarmScheduler{
             let texttoread = contents as String
             arrayOfStrings = texttoread.components(separatedBy: " ");*/
             //print("bb \(arrayOfStrings.count)")
-            filterContentForSearchText(searchText: /*arrayOfStrings[1]*/ "ezzat")
+            filterContentForSearchText(searchText: /*arrayOfStrings[1]*/ "andrew")
             for p in 0...filterdItemsArray.count{
                 print(filterdItemsArray.count)
             }
@@ -240,8 +241,14 @@ class ViewController: UIViewController ,AlarmScheduler{
     @IBAction func callCont(_ sender: Any) {
        
         searchForSimilarContacts()
+        print(filterdItemsArray.count)
         if filterdItemsArray.count == 1{
-            let url : NSURL = URL(string: "telprompt://\(filterdItemsArray[0].number)")! as NSURL
+            print("\(filterdItemsArray[0].number)")
+          /*  if let phoneCallURL  = NSURL(string: "tel//:\(filterdItemsArray[0].number)") {
+                UIApplication.shared.open(phoneCallURL as URL, options: [:], completionHandler: nil)*/
+    filterdItemsArray[0].number = filterdItemsArray[0].number.replacingOccurrences(of: " ", with: "")
+              print("\(filterdItemsArray[0].number)")
+            let url : NSURL = URL(string: "tel://\(filterdItemsArray[0].number)")! as NSURL
             UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
         }else if filterdItemsArray.count > 1 {
             performSegue(withIdentifier: "callSegue", sender: self)}
@@ -259,7 +266,12 @@ class ViewController: UIViewController ,AlarmScheduler{
     @IBAction func sendSMS(_ sender: Any) {
         searchForSimilarContacts()
         if filterdItemsArray.count == 1{
-            let url : NSURL = URL(string: "sms://\(filterdItemsArray[0].number)&body=\(smstext)")! as NSURL
+            filterdItemsArray[0].number = filterdItemsArray[0].number.replacingOccurrences(of: " ", with: "")
+            print(smstext)
+            guard let escapedBody = smstext.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+                return
+            }
+            let url : NSURL = URL(string: "sms://\(filterdItemsArray[0].number)&body=\(escapedBody)")! as NSURL
             UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
         }else if filterdItemsArray.count > 1 {
             performSegue(withIdentifier: "smsSegue", sender: self)}
@@ -278,7 +290,7 @@ class ViewController: UIViewController ,AlarmScheduler{
                
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy/MM/dd HH:mm"
-                let DateTime = formatter.date(from: "2019/05/02 01:30");
+                let DateTime = formatter.date(from: "2019/05/04 15:56");
                 //   let alarmTime = Date().addingTimeInterval(3*60)
               reminder.dueDateComponents = DateComponents(year: 2019, month: 05, day: 02, hour: 01, minute: 30)
                 let alarm = EKAlarm(absoluteDate: DateTime!)
@@ -307,7 +319,7 @@ class ViewController: UIViewController ,AlarmScheduler{
        // let component = DateComponents(year: 2019, month: 3, day: 15, hour: 05, minute: 00)
        // print(component)
         let predict = eventStore.predicateForReminders(in: calendars)
-        let text = "must do this"
+        let text = "specialization"
        eventStore.fetchReminders(matching: predict) { (reminders) in
             for remind in reminders! {
                 if remind.title.lowercased().contains(text.lowercased()){
@@ -328,6 +340,13 @@ class ViewController: UIViewController ,AlarmScheduler{
             }
         }
     }
+    
+    @IBAction func googleSearch(_ sender: UIButton) {
+        searchGoogle = "install python"
+        searchGoogle = searchGoogle.replacingOccurrences(of: " ", with: "+")
+        
+        //stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSString.CompareOptions.LiteralSearch, range: nil)
+    }
     @IBAction func Add_event(_ sender: UIButton) {
         eventStore.requestAccess(to: .event) { (granted, error) in
             if (granted) && (error == nil ){
@@ -336,9 +355,9 @@ class ViewController: UIViewController ,AlarmScheduler{
                 self.evet.title = "Add event lololololoy"
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy/MM/dd HH:mm"
-                let startDateTime = formatter.date(from: "2019/03/15 05:00");
+                let startDateTime = formatter.date(from: "2019/05/04 16:30");
                 self.evet.startDate = startDateTime
-                let endDateTime = formatter.date(from: "2019/03/16 05:35");
+                let endDateTime = formatter.date(from: "2019/05/04 19:00");
                 self.evet.endDate = endDateTime
                 // let alaram = EKAlarm(relativeOffset: 0)
                 //  evet.alarms = [alaram]
@@ -365,8 +384,8 @@ class ViewController: UIViewController ,AlarmScheduler{
         dateFormatter.dateFormat = "yyyy/MM/dd HH:mm"
         self.calendars = eventStore.calendars(for: EKEntityType.event)
         // Create start and end date NSDate instances to build a predicate for which events to select
-        let startDate = dateFormatter.date(from: "2019/03/15 04:00")
-        let endDate = dateFormatter.date(from: "2019/03/17 20:00")
+        let startDate = dateFormatter.date(from: "2019/05/04 16:00")
+        let endDate = dateFormatter.date(from: "2019/05/05 20:00")
         let prediacte = eventStore.predicateForEvents(withStart: startDate!, end: endDate!, calendars: calendars!)
         self.events = eventStore.events(matching: prediacte)
         for i in events! {
@@ -377,12 +396,12 @@ class ViewController: UIViewController ,AlarmScheduler{
         let destination = segue.destination as! oneTableViewController
          destination.contArray = filterdItemsArray
         if segue.identifier == "callSegue"{
-            urls = URL(string: "telprompt://\(filterdItemsArray[0].number)")! as NSURL
-            destination.url = urls
             destination.Seguesty = segue.identifier!
         }else if segue.identifier == "smsSegue"{
-            urls = URL(string: "sms://\(filterdItemsArray[0].number)&body=\(smstext)")! as NSURL
-            destination.url = urls
+            guard let escapedBody = smstext.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) else {
+                return
+            }
+            destination.smstext2 = escapedBody
             destination.Seguesty = segue.identifier!
         }else if segue.identifier == "reminderSegue"{
             destination.Seguesty = segue.identifier!
