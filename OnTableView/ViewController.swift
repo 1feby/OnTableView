@@ -238,6 +238,10 @@ class ViewController: UIViewController ,AlarmScheduler{
             print("An error took place: \(error)")
         }    }
     
+    @IBAction func Photos(_ sender: UIButton) {
+        let url : NSURL = URL(string: "photos-redirect://")! as NSURL
+        UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+    }
     @IBAction func callCont(_ sender: Any) {
        
         searchForSimilarContacts()
