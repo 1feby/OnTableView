@@ -344,7 +344,8 @@ class ViewController: UIViewController ,AlarmScheduler{
     @IBAction func googleSearch(_ sender: UIButton) {
         searchGoogle = "install python"
         searchGoogle = searchGoogle.replacingOccurrences(of: " ", with: "+")
-        
+        let url = NSURL(string: "http://www.google.com/search?q=\(searchGoogle)")
+        UIApplication.shared.openURL(url as! URL)
         //stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSString.CompareOptions.LiteralSearch, range: nil)
     }
     @IBAction func Add_event(_ sender: UIButton) {
