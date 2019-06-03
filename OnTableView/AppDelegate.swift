@@ -8,8 +8,10 @@
 
 import UIKit
 import CoreData
-
+let Delegate: ViewController? = UIApplication.shared.delegate as? ViewController
 @UIApplicationMain
+
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -17,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+   // Delegate?.fetchcontacts()
         return true
     }
 

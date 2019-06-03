@@ -16,7 +16,7 @@ protocol AlarmScheduler: class{
     func cancelUserNotification(for alarm: Alarm)
 }
 
-class ViewController: UIViewController ,AlarmScheduler{
+class ViewController: UIViewController ,AlarmScheduler,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
     lazy var evet : EKEvent = EKEvent(eventStore: eventStore);
     var events: [EKEvent]?
     var filterdItemsArray = [CONTACTS]()
@@ -225,19 +225,36 @@ class ViewController: UIViewController ,AlarmScheduler{
             arrayOfStrings = texttoread.components(separatedBy: " ");*/
             //print("bb \(arrayOfStrings.count)")
             filterContentForSearchText(searchText: /*arrayOfStrings[1]*/ "andrew")
-            for p in 0...filterdItemsArray.count{
-                print(filterdItemsArray.count)
-            }
+            
             if filterdItemsArray.count == 2 {
                 print(filterdItemsArray[0].fullname)
                 print(filterdItemsArray[0].number)
             }
             
             //print(" the text is \(contents)")
-        }catch  {
+        } catch  {
             print("An error took place: \(error)")
         }    }
     
+   
+    @IBAction func camera(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = self;
+            imagePickerController.sourceType = .camera
+            self.present(imagePickerController, animated: true, completion: nil)
+        }
+    }
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage]as? UIImage{
+    UIImageWriteToSavedPhotosAlbum(pickedImage, nil, nil, nil)
+            let alert = UIAlertController(title: "saved", message: "yourimage has been saved", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "ok", style: .default, handler: nil)
+            alert.addAction(okAction)
+          present(alert,animated: true , completion: nil)
+        }
+    }
     @IBAction func Photos(_ sender: UIButton) {
         let url : NSURL = URL(string: "photos-redirect://")! as NSURL
         UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
@@ -349,7 +366,7 @@ class ViewController: UIViewController ,AlarmScheduler{
         searchGoogle = "install python"
         searchGoogle = searchGoogle.replacingOccurrences(of: " ", with: "+")
         let url = NSURL(string: "http://www.google.com/search?q=\(searchGoogle)")
-        UIApplication.shared.openURL(url as! URL)
+        UIApplication.shared.openURL(url! as URL)
         //stringByReplacingOccurrencesOfString(" ", withString: "+", options: NSString.CompareOptions.LiteralSearch, range: nil)
     }
     @IBAction func Add_event(_ sender: UIButton) {
@@ -450,4 +467,5 @@ extension AlarmScheduler{
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarm.uuid!])
     }
 }
+
 
