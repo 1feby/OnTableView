@@ -248,6 +248,7 @@ class ViewController: UIViewController ,AlarmScheduler,UIImagePickerControllerDe
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true, completion: nil)
         if let pickedImage = info[UIImagePickerController.InfoKey.originalImage]as? UIImage{
+            picker.dismiss(animated: true, completion: nil)
     UIImageWriteToSavedPhotosAlbum(pickedImage, nil, nil, nil)
             let alert = UIAlertController(title: "saved", message: "yourimage has been saved", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "ok", style: .default, handler: nil)
