@@ -11,6 +11,7 @@ import Contacts
 import EventKit
 import CoreData
 import UserNotifications
+import MediaPlayer
 protocol AlarmScheduler: class{
     func scheduleUserNotification(for alarm: Alarm)
     func cancelUserNotification(for alarm: Alarm)
@@ -236,7 +237,10 @@ class ViewController: UIViewController ,AlarmScheduler,UIImagePickerControllerDe
             print("An error took place: \(error)")
         }    }
     
-   
+    @IBAction func options(_ sender: UIButton) {
+        MPVolumeView.setVolume(0.5)
+    }
+    
     @IBAction func camera(_ sender: Any) {
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             let imagePickerController = UIImagePickerController()
@@ -468,5 +472,21 @@ extension AlarmScheduler{
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [alarm.uuid!])
     }
 }
-
+extension MPVolumeView {
+    static func setVolume(_ volume: Float) {
+        // Need to use the MPVolumeView in order to change volume, but don't care about UI set so frame to .zero
+        let volumeView = MPVolumeView(frame: .zero)
+        // Search for the slider
+        let slider = volumeView.subviews.first(where: { $0 is UISlider }) as? UISlider
+        // Update the slider value with the desired volume.
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 0.01) {
+            slider?.value = volume
+        }
+        // Optional - Remove the HUD
+        if let app = UIApplication.shared.delegate as? AppDelegate, let window = app.window {
+            volumeView.alpha = 0.000001
+            window.addSubview(volumeView)
+        }
+    }
+}
 
