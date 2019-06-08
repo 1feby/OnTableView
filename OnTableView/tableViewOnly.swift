@@ -10,6 +10,7 @@ import UIKit
 import Contacts
 import EventKit
 import CoreData
+import MediaPlayer
 protocol soso: class{
     func alarmWasToggled(sender: AlarmTableViewCell, ison : Bool)
 }
@@ -31,12 +32,17 @@ class oneTableViewController : UITableViewController ,soso{
     lazy var reminder : EKReminder = EKReminder(eventStore: eventStore)
     var events: [EKEvent]?
     var calendars: [EKCalendar]?
+    let playlists = MPMediaQuery.playlists().collections
+    let myMediaPlayer = MPMusicPlayerApplicationController.applicationQueuePlayer
+    var playlistTitle: [String] = []
+    var numberOfSongs : [Int] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         LoadAlarm()
         prepareToLoadReminders()
         prepareToLoadCalendar()
+        loadPlaylists()
     }
     func prepareToLoadReminders(){
         let predict = eventStore.predicateForReminders(in: calendars)
@@ -65,6 +71,8 @@ class oneTableViewController : UITableViewController ,soso{
             return (events?.count)!
         }else if Seguesty == "alarmSegue"{
             return alarmo.count
+        }else if Seguesty == "MusicSegue"{
+            return playlistTitle.count
         }
         return 0
     }
@@ -92,6 +100,10 @@ class oneTableViewController : UITableViewController ,soso{
             cell.timeLabel!.text = alarmo[indexPath.row].stringofDate
             cell.alarmSwitch.isOn = alarmo[indexPath.row].enabled
             cell.delegatess = self
+        }else if Seguesty == "MusicSegue"{
+            cell.nameLabel.text = playlistTitle[indexPath.row]
+            cell.timeLabel.text = "\(numberOfSongs[indexPath.row]) songs"
+            cell.alarmSwitch.isHidden = true
         }
         
         return cell
@@ -108,7 +120,11 @@ class oneTableViewController : UITableViewController ,soso{
     contArray[indexPath.row].number = contArray[indexPath.row].number.replacingOccurrences(of: " ", with: "")
     url = URL(string: "sms://\(contArray[indexPath.row].number)&body=\(smstext2)")! as NSURL
     UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
-    }
+        }else if Seguesty == "MusicSegue"{
+            myMediaPlayer.setQueue(with: playlists![indexPath.row])
+            // Start playing from the beginning of the queue
+            myMediaPlayer.play()
+        }
     }
     func gotoAppleCalendar(date: NSDate) {
         let interval = date.timeIntervalSinceReferenceDate
@@ -123,4 +139,13 @@ class oneTableViewController : UITableViewController ,soso{
             print("Error fetching")
         }
     }
+    func loadPlaylists() {
+        
+        for playlist in playlists! {
+            //print(playlist.value(forProperty: MPMediaPlaylistPropertyName)!)
+            playlistTitle.append(playlist.value(forProperty: MPMediaPlaylistPropertyName)! as! String)
+            numberOfSongs.append(playlist.count)
+        }
+    }
+    
 }

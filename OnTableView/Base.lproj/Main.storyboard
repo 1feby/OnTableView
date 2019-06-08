@@ -81,15 +81,6 @@
                                     <segue destination="Vcf-J2-b04" kind="show" identifier="eventSegue" id="hqh-Xh-U6g"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3I-iE-4xu">
-                                <rect key="frame" x="16" y="489" width="137" height="61"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="remove event"/>
-                                <connections>
-                                    <action selector="Remove_event:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w90-ql-Nf2"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCa-Aj-KDk">
                                 <rect key="frame" x="133" y="141" width="123" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -173,11 +164,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="881-Q2-26X">
-                                <rect key="frame" x="21" y="67" width="64" height="30"/>
+                                <rect key="frame" x="46" y="472" width="46" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="wikipedia"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Music"/>
                                 <connections>
                                     <action selector="wikipedia:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aaU-sF-ghA"/>
+                                    <segue destination="Vcf-J2-b04" kind="show" identifier="MusicSegue" id="ZVV-t8-kG3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OEj-XT-K5p">
@@ -187,6 +180,15 @@
                                 <state key="normal" title="getweather"/>
                                 <connections>
                                     <action selector="getWeather:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L9t-PJ-HqD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3I-iE-4xu">
+                                <rect key="frame" x="16" y="489" width="137" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="remove event"/>
+                                <connections>
+                                    <action selector="Remove_event:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w90-ql-Nf2"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -279,6 +281,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="uFm-mI-ESQ"/>
+        <segue reference="ZVV-t8-kG3"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -297,7 +297,7 @@ class ViewController: UIViewController ,AlarmScheduler,UIImagePickerControllerDe
             print("An error took place: \(error)")
         }    }
     
-    @IBAction func wikipedia(_ sender: Any) {
+    @IBAction func playMusic(_ sender: Any) {
         
     }
     @IBAction func getWeather(_ sender: UIButton) {
