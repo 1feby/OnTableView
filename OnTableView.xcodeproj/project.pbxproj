@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6A357D0E84AACAB7B1E2D3AA /* Pods_OnTableView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 883DC0962DD76D43C6F85F48 /* Pods_OnTableView.framework */; };
 		B3028E3522759B6D00288D51 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3028E3422759B6D00288D51 /* AppDelegate.swift */; };
 		B3028E3722759B6D00288D51 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3028E3622759B6D00288D51 /* ViewController.swift */; };
 		B3028E3A22759B6D00288D51 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B3028E3822759B6D00288D51 /* Main.storyboard */; };
@@ -16,9 +17,13 @@
 		B3028E4D2275BCDD00288D51 /* tableViewOnly.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3028E4C2275BCDD00288D51 /* tableViewOnly.swift */; };
 		B3AAB6ED2279062100CD7A7A /* CoreDataAlarm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B3AAB6EB2279062100CD7A7A /* CoreDataAlarm.xcdatamodeld */; };
 		B3AAB6F1227A23F500CD7A7A /* AlarmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3AAB6F0227A23F400CD7A7A /* AlarmTableViewCell.swift */; };
+		B3DDEF1022AB6835008E19EC /* WeatherDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDEF0F22AB6833008E19EC /* WeatherDataModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B0BC159C8EC1F6DB6246E29 /* Pods-OnTableView.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTableView.debug.xcconfig"; path = "Target Support Files/Pods-OnTableView/Pods-OnTableView.debug.xcconfig"; sourceTree = "<group>"; };
+		883DC0962DD76D43C6F85F48 /* Pods_OnTableView.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnTableView.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7B1EC50B45187BB90A6A365 /* Pods-OnTableView.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnTableView.release.xcconfig"; path = "Target Support Files/Pods-OnTableView/Pods-OnTableView.release.xcconfig"; sourceTree = "<group>"; };
 		B3028E3122759B6D00288D51 /* OnTableView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTableView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3028E3422759B6D00288D51 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B3028E3622759B6D00288D51 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -30,6 +35,7 @@
 		B3028E4C2275BCDD00288D51 /* tableViewOnly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tableViewOnly.swift; sourceTree = "<group>"; };
 		B3AAB6EC2279062100CD7A7A /* CoreDataAlarm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreDataAlarm.xcdatamodel; sourceTree = "<group>"; };
 		B3AAB6F0227A23F400CD7A7A /* AlarmTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlarmTableViewCell.swift; sourceTree = "<group>"; };
+		B3DDEF0F22AB6833008E19EC /* WeatherDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDataModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -37,17 +43,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6A357D0E84AACAB7B1E2D3AA /* Pods_OnTableView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		320431B561405C57887A982A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				4B0BC159C8EC1F6DB6246E29 /* Pods-OnTableView.debug.xcconfig */,
+				A7B1EC50B45187BB90A6A365 /* Pods-OnTableView.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		37B75974A5AABD7EC2D50B6D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				883DC0962DD76D43C6F85F48 /* Pods_OnTableView.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B3028E2822759B6D00288D51 = {
 			isa = PBXGroup;
 			children = (
 				B3028E3322759B6D00288D51 /* OnTableView */,
 				B3028E3222759B6D00288D51 /* Products */,
+				320431B561405C57887A982A /* Pods */,
+				37B75974A5AABD7EC2D50B6D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -63,6 +89,7 @@
 			isa = PBXGroup;
 			children = (
 				B3028E3422759B6D00288D51 /* AppDelegate.swift */,
+				B3DDEF0F22AB6833008E19EC /* WeatherDataModel.swift */,
 				B3028E3622759B6D00288D51 /* ViewController.swift */,
 				B3028E4C2275BCDD00288D51 /* tableViewOnly.swift */,
 				B3AAB6F0227A23F400CD7A7A /* AlarmTableViewCell.swift */,
@@ -83,9 +110,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B3028E4322759B7D00288D51 /* Build configuration list for PBXNativeTarget "OnTableView" */;
 			buildPhases = (
+				7D8529450FFCFACD32D5BE34 /* [CP] Check Pods Manifest.lock */,
 				B3028E2D22759B6D00288D51 /* Sources */,
 				B3028E2E22759B6D00288D51 /* Frameworks */,
 				B3028E2F22759B6D00288D51 /* Resources */,
+				853E374FBA30B36A9F206794 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -142,6 +171,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7D8529450FFCFACD32D5BE34 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OnTableView-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		853E374FBA30B36A9F206794 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OnTableView/Pods-OnTableView-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OnTableView/Pods-OnTableView-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OnTableView/Pods-OnTableView-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B3028E2D22759B6D00288D51 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -149,6 +220,7 @@
 			files = (
 				B3028E3722759B6D00288D51 /* ViewController.swift in Sources */,
 				B3028E482275B51900288D51 /* contacts.swift in Sources */,
+				B3DDEF1022AB6835008E19EC /* WeatherDataModel.swift in Sources */,
 				B3AAB6ED2279062100CD7A7A /* CoreDataAlarm.xcdatamodeld in Sources */,
 				B3028E3522759B6D00288D51 /* AppDelegate.swift in Sources */,
 				B3AAB6F1227A23F500CD7A7A /* AlarmTableViewCell.swift in Sources */,
@@ -296,6 +368,7 @@
 		};
 		B3028E4422759B7D00288D51 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B0BC159C8EC1F6DB6246E29 /* Pods-OnTableView.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -314,6 +387,7 @@
 		};
 		B3028E4522759B7D00288D51 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A7B1EC50B45187BB90A6A365 /* Pods-OnTableView.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

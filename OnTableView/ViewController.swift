@@ -12,12 +12,16 @@ import EventKit
 import CoreData
 import UserNotifications
 import MediaPlayer
+import CoreLocation
+//http request
+import Alamofire
+import SwiftyJSON
 protocol AlarmScheduler: class{
     func scheduleUserNotification(for alarm: Alarm)
     func cancelUserNotification(for alarm: Alarm)
 }
 
-class ViewController: UIViewController ,AlarmScheduler,UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+class ViewController: UIViewController ,AlarmScheduler,UIImagePickerControllerDelegate, UINavigationControllerDelegate,CLLocationManagerDelegate{
     lazy var evet : EKEvent = EKEvent(eventStore: eventStore);
     var events: [EKEvent]?
     var filterdItemsArray = [CONTACTS]()
@@ -35,11 +39,67 @@ class ViewController: UIViewController ,AlarmScheduler,UIImagePickerControllerDe
     let context = (UIApplication.shared.delegate as! AppDelegate ).persistentContainer.viewContext
     var alarmo = [Alarm]()
     let formatter = DateFormatter()
+    let locationManager = CLLocationManager()
+    let weatherURl = "http://api.openweathermap.org/data/2.5/weather"
+    let App_id = "1aceb2f3462bcbb96bb892abc52ab2cb"
+    let weatherModel = WeatherDataModel()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
          fetchcontacts()
       LoadAlarm()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        
+    }
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        //last value in array will be more accurate
+        let location = locations[locations.count - 1]
+        if location.horizontalAccuracy > 0 {
+            locationManager.stopUpdatingLocation()
+            print("long = \(location.coordinate.longitude), lat = \(location.coordinate.latitude) ")
+            let latitude = String(location.coordinate.latitude)
+            let longitude = String(location.coordinate.longitude)
+            let params : [String : String ] = [ "lat" : latitude , "lon" : longitude , "appid" : App_id ]
+            getWeather(url: weatherURl, params: params)
+        }
+    }
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("yess i fail")
+        //hn7ot alert
+    }
+    // function to get data from website
+    func getWeather(url: String ,params :[String : String]){
+        Alamofire.request(url,method: .get ,parameters: params).responseJSON {
+            response in
+            if response.result.isSuccess{
+                print("success,got weather data")
+                let weatherJSON : JSON = JSON(response.result.value!)
+                self.UpdateWeatherData(json: weatherJSON)
+               // print("\(weatherJSON)")
+            }else{
+                // alert connection issues
+                print("error,\(response.result.error ?? 0 as! Error)")
+            }
+        }
+    }
+    func UpdateWeatherData(json : JSON){
+        if let temp = json["main"]["temp"].double{
+        weatherModel.temp = Int(temp - 273.15)
+        weatherModel.city = json["name"].stringValue
+        weatherModel.condition = json["weather"][0]["id"].intValue
+        weatherModel.weatherIcon = weatherModel.updateWeatherIcon(condition: weatherModel.condition)
+            let alert = UIAlertController(title : "the Weather",message : "today , the weather is",preferredStyle: .alert)
+            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(OKAction)
+            let imageAction = UIAlertAction(title: "", style: .default, handler: nil)
+            imageAction.isEnabled = false
+            imageAction.setValue(UIImage(named: weatherModel.weatherIcon), forKey: "image")
+            alert.addAction(imageAction)
+            self.present(alert, animated: true, completion: nil)
+        }else{
+            //alert city.text =  locationUNavailable
+        }
     }
     @IBAction func addAlarm(_ sender: UIButton) {
         formatter.dateFormat = "HH:mm"
@@ -237,6 +297,14 @@ class ViewController: UIViewController ,AlarmScheduler,UIImagePickerControllerDe
             print("An error took place: \(error)")
         }    }
     
+    @IBAction func wikipedia(_ sender: Any) {
+        
+    }
+    @IBAction func getWeather(_ sender: UIButton) {
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.startUpdatingLocation()
+    
+    }
     @IBAction func options(_ sender: UIButton) {
         MPVolumeView.setVolume(0.5)
     }
