@@ -81,6 +81,15 @@
                                     <segue destination="Vcf-J2-b04" kind="show" identifier="eventSegue" id="hqh-Xh-U6g"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3I-iE-4xu">
+                                <rect key="frame" x="-1" y="522" width="137" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                <state key="normal" title="remove event"/>
+                                <connections>
+                                    <action selector="Remove_event:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w90-ql-Nf2"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nCa-Aj-KDk">
                                 <rect key="frame" x="133" y="141" width="123" height="38"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -124,7 +133,6 @@
                                 <state key="normal" title="googleSearch"/>
                                 <connections>
                                     <action selector="googleSearch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qHt-sL-8Io"/>
-                                    <action selector="remove_reminder:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jrK-0A-sur"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pXq-3n-Xhl">
@@ -164,14 +172,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="881-Q2-26X">
-                                <rect key="frame" x="46" y="472" width="46" height="33"/>
+                                <rect key="frame" x="48" y="448" width="46" height="33"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <state key="normal" title="Music"/>
-                                <connections>
-                                    <action selector="wikipedia:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aaU-sF-ghA"/>
-                                    <segue destination="Vcf-J2-b04" kind="show" identifier="MusicSegue" id="ZVV-t8-kG3"/>
-                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OEj-XT-K5p">
                                 <rect key="frame" x="39" y="251" width="97" height="35"/>
@@ -182,23 +186,32 @@
                                     <action selector="getWeather:" destination="BYZ-38-t0r" eventType="touchUpInside" id="L9t-PJ-HqD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F3I-iE-4xu">
-                                <rect key="frame" x="16" y="489" width="137" height="61"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HdZ-rC-zrr">
+                                <rect key="frame" x="231" y="96" width="83" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                <state key="normal" title="remove event"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Wikipedia"/>
                                 <connections>
-                                    <action selector="Remove_event:" destination="BYZ-38-t0r" eventType="touchUpInside" id="w90-ql-Nf2"/>
+                                    <action selector="wikipedia:" destination="BYZ-38-t0r" eventType="touchUpInside" id="do5-Ka-WBe"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VCP-My-xKw">
+                                <rect key="frame" x="104" y="64" width="66" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" id="4dk-ti-jmh"/>
                     <connections>
+                        <outlet property="testLabel" destination="VCP-My-xKw" id="Gdk-RG-FKO"/>
                         <segue destination="Vcf-J2-b04" kind="show" identifier="callSegue" id="UXK-yq-YQe"/>
                         <segue destination="Vcf-J2-b04" kind="show" identifier="smsSegue" id="uFm-mI-ESQ"/>
+                        <segue destination="Vcf-J2-b04" kind="show" identifier="wikiSegue" id="7mE-OD-WE2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -214,40 +227,45 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="oneCell" id="fq1-F5-ZwP" customClass="AlarmTableViewCell" customModule="OnTableView" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="oneCell" rowHeight="77" id="fq1-F5-ZwP" customClass="AlarmTableViewCell" customModule="OnTableView" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fq1-F5-ZwP" id="1f1-iG-cZE">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="76.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="nameLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ah3-Kn-sRY">
-                                            <rect key="frame" x="16" y="-2" width="275" height="21"/>
+                                            <rect key="frame" x="16" y="11" width="275" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="timeLabel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvN-8P-juk">
-                                            <rect key="frame" x="16" y="22" width="275" height="21"/>
+                                            <rect key="frame" x="16" y="45" width="275" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eMR-hd-Zy9">
-                                            <rect key="frame" x="299" y="6" width="49" height="31"/>
+                                            <rect key="frame" x="265" y="22" width="49" height="31"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <connections>
                                                 <action selector="alarmSwitched:" destination="fq1-F5-ZwP" eventType="valueChanged" id="oIc-YZ-GYW"/>
                                             </connections>
                                         </switch>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NWx-fX-i4x">
+                                            <rect key="frame" x="189" y="0.0" width="131" height="77"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="alarmSwitch" destination="eMR-hd-Zy9" id="kWD-E4-hwt"/>
                                     <outlet property="nameLabel" destination="ah3-Kn-sRY" id="rwF-2C-GM6"/>
                                     <outlet property="timeLabel" destination="xvN-8P-juk" id="YYN-SF-Ggh"/>
+                                    <outlet property="wikiImage" destination="NWx-fX-i4x" id="VAd-tA-F4U"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -259,7 +277,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YTG-oO-9fW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2084.057971014493" y="-4.0178571428571423"/>
+            <point key="canvasLocation" x="2083.125" y="-4.225352112676056"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zhh-bp-xWd">
@@ -281,6 +299,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ZVV-t8-kG3"/>
+        <segue reference="7mE-OD-WE2"/>
     </inferredMetricsTieBreakers>
 </document>

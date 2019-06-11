@@ -11,6 +11,8 @@ import Contacts
 import EventKit
 import CoreData
 import MediaPlayer
+import SwiftyJSON
+import Alamofire
 protocol soso: class{
     func alarmWasToggled(sender: AlarmTableViewCell, ison : Bool)
 }
@@ -32,17 +34,20 @@ class oneTableViewController : UITableViewController ,soso{
     lazy var reminder : EKReminder = EKReminder(eventStore: eventStore)
     var events: [EKEvent]?
     var calendars: [EKCalendar]?
-    let playlists = MPMediaQuery.playlists().collections
-    let myMediaPlayer = MPMusicPlayerApplicationController.applicationQueuePlayer
-    var playlistTitle: [String] = []
-    var numberOfSongs : [Int] = []
+    var wikititle = [String]()
+    var wikidesc = [String]()
+    var wikiimage = [UIImage]()
+    var datawiki = [JSON]()
+    var viewcont = ViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        LoadAlarm()
+       LoadAlarm()
         prepareToLoadReminders()
         prepareToLoadCalendar()
-        loadPlaylists()
+       // loadPlaylists()
+   
     }
     func prepareToLoadReminders(){
         let predict = eventStore.predicateForReminders(in: calendars)
@@ -71,9 +76,15 @@ class oneTableViewController : UITableViewController ,soso{
             return (events?.count)!
         }else if Seguesty == "alarmSegue"{
             return alarmo.count
-        }else if Seguesty == "MusicSegue"{
-            return playlistTitle.count
+        }else if Seguesty == "wikiSegue"{
+            print("mggm : \(wikititle.count)")
+            print("mggf : \(wikidesc.count)")
+            print("mggm : \(wikiimage.count)")
+            return (datawiki.count)
+            
         }
+        /*else if Seguesty == "MusicSegue"{
+        return viewcont.playlistTitle.count        }*/
         return 0
     }
     
@@ -84,27 +95,38 @@ class oneTableViewController : UITableViewController ,soso{
         cell.nameLabel!.text = contArray[indexPath.row].fullname
         cell.timeLabel!.text = contArray[indexPath.row].number
         cell.alarmSwitch.isHidden = true
+            cell.wikiImage.isHidden = true
         }else if Seguesty == "reminderSegue"{
             var datecomp = reminderstoto[indexPath.row].dueDateComponents
             cell.nameLabel!.text = reminderstoto[indexPath.row].title
             print("\(datecomp?.year ?? 0)")
            cell.timeLabel!.text = "\(datecomp?.year ?? 0)/\(datecomp?.month ?? 0)/\(datecomp?.day ?? 0)          \(datecomp?.hour ?? 0):\(datecomp?.minute ?? 0)"
             cell.alarmSwitch.isHidden = true
+            cell.wikiImage.isHidden = true
         }else if Seguesty == "eventSegue"{
             cell.nameLabel!.text = events?[indexPath.row].title
             cell.timeLabel!.text = "\(events?[indexPath.row].endDate ?? Date())"
             cell.alarmSwitch.isHidden = true
+            cell.wikiImage.isHidden = true
         }else if Seguesty == "alarmSegue"{
             
             cell.nameLabel!.text = alarmo[indexPath.row].name
             cell.timeLabel!.text = alarmo[indexPath.row].stringofDate
             cell.alarmSwitch.isOn = alarmo[indexPath.row].enabled
+            cell.wikiImage.isHidden = true
             cell.delegatess = self
-        }else if Seguesty == "MusicSegue"{
-            cell.nameLabel.text = playlistTitle[indexPath.row]
-            cell.timeLabel.text = "\(numberOfSongs[indexPath.row]) songs"
+        }else if Seguesty == "wikiSegue" {
+            print("iddi")
+            cell.nameLabel!.text = wikititle[indexPath.row]
+            cell.timeLabel!.text = wikidesc[indexPath.row]
             cell.alarmSwitch.isHidden = true
+            cell.wikiImage.image = wikiimage[indexPath.row]
         }
+        /*else if Seguesty == "MusicSegue"{
+            cell.nameLabel.text = viewcont.playlistTitle[indexPath.row]
+            cell.timeLabel.text = "\(viewcont.numberOfSongs[indexPath.row]) songs"
+            cell.alarmSwitch.isHidden = true
+        }*/
         
         return cell
     }
@@ -120,11 +142,17 @@ class oneTableViewController : UITableViewController ,soso{
     contArray[indexPath.row].number = contArray[indexPath.row].number.replacingOccurrences(of: " ", with: "")
     url = URL(string: "sms://\(contArray[indexPath.row].number)&body=\(smstext2)")! as NSURL
     UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
-        }else if Seguesty == "MusicSegue"{
-            myMediaPlayer.setQueue(with: playlists![indexPath.row])
-            // Start playing from the beginning of the queue
-            myMediaPlayer.play()
+        }else if Seguesty == "wikiSegue"{
+            print("\(wikititle[indexPath.row])")
+            var wikiSearch = wikititle[indexPath.row].replacingOccurrences(of: " ", with: "_")
+            let url = NSURL(string: "https://en.wikipedia.org/wiki/\(wikiSearch)")
+             UIApplication.shared.openURL(url! as URL)
         }
+        /*else if Seguesty == "MusicSegue"{
+            viewcont.myMediaPlayer.setQueue(with: viewcont.playlists![indexPath.row])
+            // Start playing from the beginning of the queue
+            viewcont.myMediaPlayer.play()
+        }*/
     }
     func gotoAppleCalendar(date: NSDate) {
         let interval = date.timeIntervalSinceReferenceDate
@@ -139,13 +167,6 @@ class oneTableViewController : UITableViewController ,soso{
             print("Error fetching")
         }
     }
-    func loadPlaylists() {
-        
-        for playlist in playlists! {
-            //print(playlist.value(forProperty: MPMediaPlaylistPropertyName)!)
-            playlistTitle.append(playlist.value(forProperty: MPMediaPlaylistPropertyName)! as! String)
-            numberOfSongs.append(playlist.count)
-        }
-    }
+
     
 }

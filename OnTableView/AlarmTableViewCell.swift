@@ -18,6 +18,7 @@ class AlarmTableViewCell: UITableViewCell{
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var alarmSwitch: UISwitch!
+    @IBOutlet weak var wikiImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

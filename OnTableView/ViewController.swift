@@ -43,14 +43,20 @@ class ViewController: UIViewController ,AlarmScheduler,UIImagePickerControllerDe
     let weatherURl = "http://api.openweathermap.org/data/2.5/weather"
     let App_id = "1aceb2f3462bcbb96bb892abc52ab2cb"
     let weatherModel = WeatherDataModel()
+    var titles : [String] = []
+    var descrip : [String] = []
+    var images : [UIImage] = []
+    var results : [JSON] = []
+    @IBOutlet weak var testLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-         fetchcontacts()
+fetchcontacts()
       LoadAlarm()
         locationManager.delegate = self
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        
+       locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        //loadPlaylists()
+         getWikipedia(searchName: "phoebe")
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         //last value in array will be more accurate
@@ -68,7 +74,8 @@ class ViewController: UIViewController ,AlarmScheduler,UIImagePickerControllerDe
         print("yess i fail")
         //hn7ot alert
     }
-    // function to get data from website
+   
+    // function to get data from weather website
     func getWeather(url: String ,params :[String : String]){
         Alamofire.request(url,method: .get ,parameters: params).responseJSON {
             response in
@@ -89,17 +96,67 @@ class ViewController: UIViewController ,AlarmScheduler,UIImagePickerControllerDe
         weatherModel.city = json["name"].stringValue
         weatherModel.condition = json["weather"][0]["id"].intValue
         weatherModel.weatherIcon = weatherModel.updateWeatherIcon(condition: weatherModel.condition)
-            let alert = UIAlertController(title : "the Weather",message : "today , the weather is",preferredStyle: .alert)
-            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
-            alert.addAction(OKAction)
+            let alert = UIAlertController(title : "the Weather",message : "today , the weather is \(weatherModel.temp) in  \(weatherModel.city)",preferredStyle: .alert)
+           
             let imageAction = UIAlertAction(title: "", style: .default, handler: nil)
             imageAction.isEnabled = false
             imageAction.setValue(UIImage(named: weatherModel.weatherIcon), forKey: "image")
             alert.addAction(imageAction)
+            let OKAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+            alert.addAction(OKAction)
             self.present(alert, animated: true, completion: nil)
         }else{
             //alert city.text =  locationUNavailable
         }
+    }
+    // function to get data from Wikipedia
+    func getWikipedia(searchName : String){
+        let wikiURl = "https://en.wikipedia.org//w/api.php?action=query&format=json&prop=pageimages%7Cpageterms&generator=prefixsearch&redirects=1&formatversion=2&piprop=thumbnail&pithumbsize=50&pilimit=10&wbptterms=description&gpssearch=\(searchName)&gpslimit=10"
+        Alamofire.request(wikiURl , method: .get ).responseJSON {
+            response in
+            if response.result.isSuccess {
+                let wikiJSON : JSON = JSON(response.result.value!)
+                //print(wikiJSON)
+                self.UpdateWikipedia(json: wikiJSON)
+            }
+        }
+    }
+    func fetchImage(url : String)  {
+        Alamofire.request(url).responseData { responseData in
+            
+            guard let imageData = responseData.data else {
+                //alert
+                return
+            }
+            
+            if let image = UIImage(data: imageData) {
+                self.images.append(image)
+            }else {
+                //alert
+                self.images.append(UIImage(named: "man")!)
+            }
+            
+            
+            
+        }
+        
+    }
+    func UpdateWikipedia(json : JSON){
+         results = json["query"]["pages"].arrayValue
+        print(results.count)
+        for i  in results{
+            titles.append(i["title"].stringValue)
+            descrip.append(i["terms"]["description"][0].stringValue)
+            fetchImage(url: i["thumbnail"]["source"].stringValue)
+        }
+        print("ssos \(titles.count)")
+    }
+    @IBAction func wikipedia(_ sender: UIButton) {
+        print("yes")
+        
+       
+       // testLabel.text =  "ffkf"
+     performSegue(withIdentifier: "wikiSegue", sender: self)
     }
     @IBAction func addAlarm(_ sender: UIButton) {
         formatter.dateFormat = "HH:mm"
@@ -297,9 +354,19 @@ class ViewController: UIViewController ,AlarmScheduler,UIImagePickerControllerDe
             print("An error took place: \(error)")
         }    }
     
-    @IBAction func playMusic(_ sender: Any) {
-        
-    }
+   /* @IBAction func playMusic(_ sender: Any) {
+    //  performSegue(withIdentifier: "MusicSegue", sender: self)
+    }*/
+   /* func loadPlaylists() {
+        var i : Int = 0
+        for playlist in playlists! {
+            //print(playlist.value(forProperty: MPMediaPlaylistPropertyName)!)
+            playlistTitle.append(playlist.value(forProperty: MPMediaPlaylistPropertyName)! as! String)
+            numberOfSongs.append(playlist.count)
+            i = i + 1
+        }
+        print(i)
+    }*/
     @IBAction func getWeather(_ sender: UIButton) {
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
@@ -450,9 +517,9 @@ class ViewController: UIViewController ,AlarmScheduler,UIImagePickerControllerDe
                 self.evet.title = "Add event lololololoy"
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy/MM/dd HH:mm"
-                let startDateTime = formatter.date(from: "2019/05/04 16:30");
+                let startDateTime = formatter.date(from: "2019/06/10 10:30");
                 self.evet.startDate = startDateTime
-                let endDateTime = formatter.date(from: "2019/05/04 19:00");
+                let endDateTime = formatter.date(from: "2019/06/11 19:00");
                 self.evet.endDate = endDateTime
                 // let alaram = EKAlarm(relativeOffset: 0)
                 //  evet.alarms = [alaram]
@@ -505,6 +572,12 @@ class ViewController: UIViewController ,AlarmScheduler,UIImagePickerControllerDe
         }else if segue.identifier == "eventSegue" || segue.identifier == "alarmSegue" {
             destination.Seguesty  = segue.identifier!
             
+        }else if segue.identifier ==  "wikiSegue"{
+        destination.wikiimage = images
+            destination.wikidesc = descrip
+            destination.wikititle = titles
+            destination.datawiki = results
+            destination.Seguesty = segue.identifier!
         }
     }
     func deleteevent(event : EKEvent){
